@@ -9,10 +9,10 @@ our "NORMAL" emails from our inbox and then we feed the built model with them to
 # Utilities
 
 - Email extractor:
-You can extract emails from your Gmail account by runing ```extract_email.py ``` which is in check inbox directory
+You can extract emails from your Gmail account by running ```extract_email.py ``` which is in check inbox directory
 
 - GUI: you can run the GUI with the following command ```python3 notifGUI.py```
-- You can train and save the model by runing ```spamdetection.py ```
+- You can train and save the model by running ```spamdetection.py ```
 - You can run the whole application with ``` python3 app.py ```
 
 # GUI
