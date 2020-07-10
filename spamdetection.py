@@ -51,7 +51,7 @@ for model in models.values():
     trained_models.append(model)
 
 #Choosing logistic regression after trying it on test data and saving it
-#pickle.dump(trained_models[0], open('trained_model', 'wb'))
+pickle.dump(trained_models, open('trained_model', 'wb'))
 
 
 loaded_model = pickle.load('trained_model', 'rb')
