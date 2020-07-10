@@ -2,8 +2,8 @@ import imaplib
 import email
 from getpass import getpass
 import sys
-import pickle  
-from vectorize import vectorizer
+#import pickle  
+#from vectorize import vectorizer
 
 host = 'imap.gmail.com'
 username = input('Write your email : ')
@@ -65,33 +65,10 @@ def checkNew(connection):
 
     except IndexError:
         return 1
-    
-def classify(email_message, vectClass):
-    """ A function which returns whether an email is a spam or not  """ 
-    email_message = list(email_message)
-    vectorized_email = vectClass.transform(email_message)
-    models = pickle.load(open('trained_models', 'rb'))
-    prediction = models[0].predict(vectorized_email)
-    
-    #Prediction is a list of 0 and 1 like the following one 
-    """[0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0] """
-    
-    #turn the predictions into a list to count the number of zeros and the number of ones 
-    # if the result is 1 ===> The email is a spam 
-    #if the result is 0 ===> The email is not a spam 
-    prediction = list(prediction) 
-    number_zeros = prediction.count(0)
-    number_ones = prediction. count(1)
-    
-    if number_zeros > number_ones:
-        return 0 
-    else:
-        return 1
 
     
 #Fetch for the first time the last message
 email_message = fetchDecode(last_id, mail)
-#print(classify(email_message, vectorizer))
 
 #Keep track of new emails and display get notified if there are new emails
 while True:
@@ -103,11 +80,4 @@ while True:
     elif current_id != 1:
         last_id = current_id 
         email_message = fetchDecode(last_id, mail)
-        
-        #print(classify(email_message, vectorizer))
-
-
-    
-
-   
         
