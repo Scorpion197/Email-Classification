@@ -70,8 +70,15 @@ def classify(email_message, vectClass):
     """ A function which returns whether an email is a spam or not  """ 
     message = list(email_message)
     vectorized_email = vectClass.transform(message)
-    models = pickle.load(open('trained_models', 'rb'))
-    prediction = models[0].predict(vectorized_email)
+    
+    #Load the trained model from a file 
+    try:
+        models = pickle.load(open('trained_models', 'rb'))
+        prediction = models[0].predict(vectorized_email)
+        
+    except FileNotFoundError:
+        print("Model's file not found. Please save the model and try again ")
+        sys.exit(0)
     
     prediction = list(prediction)
     number_zeros = prediction.count(0)
@@ -87,7 +94,7 @@ email_message = fetchDecode(last_id, mail)
 
 print(classify(email_message, vectorizer))
 
-#Keep track of nw emails and display get notified if there are new emails
+#Keep track of new emails and get notified if there are new non-spam emails
 while True:
 
     current_id = checkNew(mail)
@@ -97,10 +104,16 @@ while True:
     elif current_id != 1:
         last_id = current_id 
         email_message = fetchDecode(last_id, mail)
+        prediction = classify(email_message, vectorizer)
 
+        if prediction == 1:
+            continue 
+        else:
 
-
-    
-
-   
-        
+            try:
+                app = QApplication(sys.argv)
+                window = NoteGui(email_message)  
+                app.exec_()
+                
+            except KeyboardInterrupt:
+                sys.exit(0)
