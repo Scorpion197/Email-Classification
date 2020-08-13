@@ -8,18 +8,19 @@ our "NORMAL" emails from our inbox and then we feed the built model with them to
 
 # Utilities
 
-- Email extractor:
-You can extract emails from your Gmail account by running ```extract_email.py ``` which is in check inbox directory
+✔ Email extractor: You can extract emails from your Gmail account by running ```extract_email.py ``` which is in check inbox directory
 
-- GUI: you can run the GUI with the following command ```python3 notifGUI.py```
-- You can train and save the model by running ```spamdetection.py ```
-- You can run the whole application with ``` python3 app.py ```
+⚡ GUI: you can run the GUI with the following command ```python3 notifGUI.py```
+
+💎 You can train and save the model by running ```spamdetection.py ```
+
+🧿 You can run the whole application with ``` python3 app.py ```
 
 # GUI
 The program is running constantly which means it has an eye permanently on our inbox. Whenever we have a new email, we provide it to the model. If he judges it as normal then we will have a notification in our desktop. The small notification GUI is built using PyQt5
 
 # Installing the requirements
 You can install the tools with the command: 
-``` pip install scikit-learn pandas seaborn matplotlib nltk ```
+``` pip install scikit-learn pandas seaborn matplotlib nltk numpy ```
 # Testing Your emails
 To test your emails just run the code in jupyter notebook and write your email as a text.
