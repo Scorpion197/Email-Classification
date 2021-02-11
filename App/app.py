@@ -28,7 +28,7 @@ except Exception :
     sys.exit(0)
 
 
-def fetchDecode(message_id, connection):
+def fetch_decode(message_id, connection):
     """ A function to fetch an email given its id, decode it and printing it """
 
     result, data = connection.fetch(message_id, "(RFC822)")
@@ -50,7 +50,7 @@ def fetchDecode(message_id, connection):
             print('Error while decoding the message')
             break 
 
-def checkNew(connection):
+def check_new(connection):
     """ A function to check if there are new emails """
     #Check if there are new emails
     connection.select("inbox")
@@ -90,20 +90,20 @@ def classify(email_message, vectClass):
         return 1
 
 #Fetch for the first time the last message
-email_message = fetchDecode(last_id, mail)
+email_message = fetch_decode(last_id, mail)
 
 print(classify(email_message, vectorizer))
 
 #Keep track of new emails and get notified if there are new non-spam emails
 while True:
 
-    current_id = checkNew(mail)
+    current_id = check_new(mail)
     if current_id == 1:
         continue 
 
     elif current_id != 1:
         last_id = current_id 
-        email_message = fetchDecode(last_id, mail)
+        email_message = fetch_decode(last_id, mail)
         prediction = classify(email_message, vectorizer)
 
         if prediction == 1:
